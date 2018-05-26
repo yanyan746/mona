@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yanyan/src/cmake-3.11.1/Tests/RunCMake/pseudo_emulator_custom_command.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+

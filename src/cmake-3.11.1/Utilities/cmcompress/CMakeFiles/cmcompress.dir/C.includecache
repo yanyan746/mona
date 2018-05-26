@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/yanyan/src/cmake-3.11.1/Utilities/cmcompress/cmcompress.c
+cmcompress.h
+/home/yanyan/src/cmake-3.11.1/Utilities/cmcompress/cmcompress.h
+errno.h
+-
+string.h
+-
+
+/home/yanyan/src/cmake-3.11.1/Utilities/cmcompress/cmcompress.h
+stdio.h
+-
+
