@@ -1,5 +1,14 @@
 Copyright 2018, yanyan. All rights reserved
 
+******************
+git clone https://github.com/yanyan746/mona.git
+sudo cp -r mysql-connector-c++-1.1.11/include/ /usr/local/include
+sudo apt install libmysqlcppconn-dev
+sudo apt install libcurl4-openssl-dev
+
+// please adjust -L path in GNUmakefile
+******************
+
 名前：未定
 目的：記事作成インセンティブの底上げ、対外向け自社紹介用
 内容：作成者が自分以外の記事へmonacoinを投げ銭するシステム
