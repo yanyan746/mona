@@ -139,29 +139,33 @@ void User::getMyArticle(string login_name) {
   }
 }
 
-size_t stream_write(char* ptr, size_t size, size_t nmemb, void* stream) {
-  ((string*) stream)->append(string(ptr, size * nmemb));
-  return size * nmemb;
-}
-
 void User::getAddressInfo() {
   CURL *curl = curl_easy_init();
   struct curl_slist *headers = NULL;
   string buf;
 
+  // for curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, LocalFunc::call_back)
+  struct LocalFunc {
+    static size_t call_back(char* ptr, size_t size, size_t nmemb, void* stream) {
+      ((string*) stream)->append(string(ptr, size * nmemb));
+      return size * nmemb;
+    }
+  };
+
   if (curl) {
-    const char *query = "{\"jsonrpc\": \"1.0\", \"id\":\"curltest\", \"method\": \"getblockchaininfo\", \"params\": [] }";
+    // command : curl --user 'yanyan:password' --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"getblockchaininfo","params":[]}' -H 'content-type:text/plain;' http://127.0.0.1:9042
+    const char *query = "{\"jsonrpc\": \"1.0\", \"id\":\"curltext\", \"method\": \"getblockchaininfo\", \"params\": [] }";
 
   	headers = curl_slist_append(headers, "content-type: text/plain;");
   	curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
-  	curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:9402/");
+  	curl_easy_setopt(curl, CURLOPT_URL, "http://127.0.0.1:9042/");
   	//curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, (long) strlen(query));
   	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, query);
   	curl_easy_setopt(curl, CURLOPT_USERPWD, "yanyan:password");
   	curl_easy_setopt(curl, CURLOPT_USE_SSL, CURLUSESSL_TRY);
-    // curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl");
+    curl_easy_setopt(curl, CURLOPT_USERAGENT, "curl");
     curl_easy_setopt(curl, CURLOPT_WRITEDATA, &buf);
-    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, stream_write);
+    curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, LocalFunc::call_back);
   	curl_easy_perform(curl);
     curl_easy_cleanup(curl);
 
