@@ -1,5 +1,5 @@
 MYSQL_CONCPP_DIR= ...
-CPPFLAGS = -L $/home/yanyan/Dev/mona/src/mysql-connector-c++-1.1.11/lib
+CPPFLAGS = -L $/home/dropin.keiri/Dev/mona/src/mysql-connector-c++-1.1.11/lib
 LDLIBS = -lmysqlcppconn
 CXXFLAGS = -std=c++11
 
